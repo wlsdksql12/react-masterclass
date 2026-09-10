@@ -1,17 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "styled-components";
 import App from "./App.tsx";
-
-const darkTheme = {
-  textColor: "whitesmoke",
-  backgroundColor: "#111",
-};
-
-const lightTheme = {
-  textColor: "#111",
-  backgroundColor: "whitesmoke",
-};
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

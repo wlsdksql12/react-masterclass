@@ -1,40 +1,34 @@
-import {
-  AnimationBox,
-  Body,
-  BoxOne,
-  Btn,
-  Circle,
-  Emoji,
-  Father,
-  Input,
-  Text,
-} from "./style/App.style";
+import { useState } from "react";
+import "./style/style";
 import "./style/reset.css";
+import { Container, H1 } from "./style/style";
 
 function App() {
+  // const [value, setValue] = useState("");
+  // const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValue(event.currentTarget.value);
+  // };
+  // const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   console.log(value);
+  // };
+
   return (
-    <Body>
-      {/* <Father>
-        <BoxOne $bgColor="teal">
-          <Text>Hello</Text>
-        </BoxOne>
-        <Circle $bgColor="tomato" />
-      </Father>
+    <Container>
+      <H1>Hello React World!!</H1>
+    </Container>
 
-      <Btn>Log in</Btn>
-      <Btn as="a" href="/">
-        Log in
-      </Btn>
-
-      <Input /> */}
-
-      {/* <AnimationBox>
-        <Emoji>😁</Emoji>
-      </AnimationBox>
-      <Emoji>🤣</Emoji> */}
-
-      <Text as="div">Hello Recat World!!</Text>
-    </Body>
+    // <div>
+    //   <form onSubmit={onSubmit}>
+    //     <input
+    //       type="text"
+    //       placeholder="userName"
+    //       value={value}
+    //       onChange={onChange}
+    //     />
+    //     <button>Log In</button>
+    //   </form>
+    // </div>
   );
 }
 
