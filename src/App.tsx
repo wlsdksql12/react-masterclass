@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./style/style";
 import "./style/reset.css";
 import { Container, H1 } from "./style/style";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
   // const [value, setValue] = useState("");
@@ -14,9 +16,9 @@ function App() {
   // };
 
   return (
-    <Container>
-      <H1>Hello React World!!</H1>
-    </Container>
+    // <Container>
+    //   <H1>Hello React World!!</H1>
+    // </Container>
 
     // <div>
     //   <form onSubmit={onSubmit}>
@@ -29,6 +31,10 @@ function App() {
     //     <button>Log In</button>
     //   </form>
     // </div>
+    <div>
+      <Header />
+      <Outlet />
+    </div>
   );
 }
 
