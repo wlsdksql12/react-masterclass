@@ -6,31 +6,20 @@ import App from "./App";
 import NotFound from "./screens/NotFound";
 import User from "./screens/users/User";
 import Followers from "./screens/users/Followers";
+import Coins from "./routes/Coins";
+import Coin from "./routes/Coin";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "users/:userId",
-        element: <User />,
-        children: [
-          {
-            path: "Followers",
-            element: <Followers />,
-          },
-        ],
-      },
-    ],
+    element: <Coins />,
+    children: [],
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/:coinId",
+    element: <Coin />,
+    children: [],
     errorElement: <NotFound />,
   },
 ]);

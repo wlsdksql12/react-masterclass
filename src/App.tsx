@@ -1,40 +1,35 @@
-import { useState } from "react";
-import "./style/style";
+import { createGlobalStyle } from "styled-components";
 import "./style/reset.css";
-import { Container, H1 } from "./style/style";
-import { Outlet } from "react-router-dom";
-import Header from "./components/Header";
+import { RouterProvider } from "react-router-dom";
+import router from "./Router";
+
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300&display=swap');
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Source Sans 3", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    background-color: ${(prop) => prop.theme.bgColor};
+    color: ${(prop) => prop.theme.textColor}
+  }
+
+  a {
+    text-decoration:none;
+  }
+`;
 
 function App() {
-  // const [value, setValue] = useState("");
-  // const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue(event.currentTarget.value);
-  // };
-  // const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log(value);
-  // };
-
   return (
-    // <Container>
-    //   <H1>Hello React World!!</H1>
-    // </Container>
-
-    // <div>
-    //   <form onSubmit={onSubmit}>
-    //     <input
-    //       type="text"
-    //       placeholder="userName"
-    //       value={value}
-    //       onChange={onChange}
-    //     />
-    //     <button>Log In</button>
-    //   </form>
-    // </div>
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </>
   );
 }
 
