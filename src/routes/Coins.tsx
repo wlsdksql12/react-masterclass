@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Coins.styled";
 import * as S from "../style/Coins.styled";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCoins } from "../api";
+import { Helmet } from "react-helmet";
 
 interface CoinInterface {
   id: string;
@@ -13,33 +16,40 @@ interface CoinInterface {
   type: string;
 }
 function Coins() {
-  const [coins, setCoins] = useState<CoinInterface[]>([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchCoins = async () => {
-      try {
-        const response = await fetch("https://api.coinpaprika.com/v1/coins");
-        const json = await response.json();
-        setCoins(json.slice(0, 100));
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { isLoading, data } = useQuery<CoinInterface[]>({
+    queryKey: ["allCoins"],
+    queryFn: fetchCoins,
+  });
+  // const [coins, setCoins] = useState<CoinInterface[]>([]);
+  // const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const fetchCoins = async () => {
+  //     try {
+  //       const response = await fetch("https://api.coinpaprika.com/v1/coins");
+  //       const json = await response.json();
+  //       setCoins(json.slice(0, 100));
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchCoins();
-  }, []);
+  //   fetchCoins();
+  // }, []);
 
   return (
     <S.Container>
+      <Helmet>
+        <title>코인</title>
+      </Helmet>
       <S.Header>
         <S.Title>코인</S.Title>
       </S.Header>
-      {loading ? (
+      {isLoading ? (
         <S.Loader>Loding...</S.Loader>
       ) : (
         <S.CoinsList>
-          {coins.map((coin) => (
+          {data?.slice(0, 100).map((coin) => (
             <Link key={coin.id} to={`/${coin.id}`} state={{ name: coin.name }}>
               <S.Coin>
                 <S.Coinimg

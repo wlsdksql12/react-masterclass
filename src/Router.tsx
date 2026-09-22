@@ -8,6 +8,8 @@ import User from "./screens/users/User";
 import Followers from "./screens/users/Followers";
 import Coins from "./routes/Coins";
 import Coin from "./routes/Coin";
+import Price from "./routes/Price";
+import Chart from "./routes/Chart";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,16 @@ const router = createBrowserRouter([
   {
     path: "/:coinId",
     element: <Coin />,
-    children: [],
+    children: [
+      {
+        path: "price",
+        element: <Price />,
+      },
+      {
+        path: "chart",
+        element: <Chart />,
+      },
+    ],
     errorElement: <NotFound />,
   },
 ]);
