@@ -1,7 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import "./style/reset.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
+import { darkTheme, lightTheme } from "./theme";
+import { createContext, useState } from "react";
+import { useAtom, useAtomValue } from "jotai";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300&display=swap');
@@ -25,11 +29,19 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const IsDarkContext = createContext({
+  isDark: false,
+  toggleDark: () => {},
+});
+
 function App() {
+  const isDark = useAtomValue(isDarkAtom);
   return (
     <>
-      <GlobalStyle />
-      <RouterProvider router={router} />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   );
 }

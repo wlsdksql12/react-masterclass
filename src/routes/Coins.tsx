@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Coins.styled";
 import * as S from "../style/Coins.styled";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet";
+import { IsDarkContext } from "../App";
+import { useAtom } from "jotai";
+import { isDarkAtom } from "../atoms";
 
 interface CoinInterface {
   id: string;
@@ -16,6 +19,8 @@ interface CoinInterface {
   type: string;
 }
 function Coins() {
+  const [isDark, setIsDark] = useAtom(isDarkAtom);
+  const toggleDark = () => setIsDark((prev) => !prev);
   const { isLoading, data } = useQuery<CoinInterface[]>({
     queryKey: ["allCoins"],
     queryFn: fetchCoins,
@@ -44,6 +49,9 @@ function Coins() {
       </Helmet>
       <S.Header>
         <S.Title>코인</S.Title>
+        <button onClick={toggleDark}>
+          {isDark ? "Light Mode" : "Dark Mode"}
+        </button>
       </S.Header>
       {isLoading ? (
         <S.Loader>Loding...</S.Loader>

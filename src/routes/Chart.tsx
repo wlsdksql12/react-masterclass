@@ -2,6 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useOutletContext } from "react-router-dom";
 import { fetchCoinHistory } from "../api";
 import ApexCharts from "react-apexcharts";
+import { useContext } from "react";
+import { IsDarkContext } from "../App";
+import { useAtomValue } from "jotai";
+import { isDarkAtom } from "../atoms";
 
 interface ChartProps {
   coinId: string;
@@ -19,6 +23,7 @@ interface IHistorical {
 }
 
 function Chart() {
+  const isDark = useAtomValue(isDarkAtom);
   const { coinId } = useOutletContext<ChartProps>();
   console.log(coinId);
   const { isLoading, data } = useQuery<IHistorical[]>({
@@ -50,7 +55,7 @@ function Chart() {
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 500,

@@ -16,14 +16,15 @@ export const Header = styled.header`
 export const CoinsList = styled.ul``;
 
 export const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.liColor};
+  color: ${(props) => props.theme.textColor};
   padding: 20px;
   border-radius: 15px;
   margin-bottom: 10px;
   transition: color 0.2s ease-in;
   display: flex;
   align-items: center;
+  border: 1.5px solid ${(props) => props.theme.textColor};
   &:hover {
     color: ${(props) => props.theme.accentColor};
   }
