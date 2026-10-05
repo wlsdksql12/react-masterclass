@@ -1,8 +1,7 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { darkTheme } from "./theme.ts";
-
+import "./style/reset.css";
+import ToDoList from "./components/ToDoList";
+import { darkTheme } from "./theme";
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300&display=swap');
   
@@ -25,11 +24,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-createRoot(document.getElementById("root")!).render(
-  // <StrictMode>
-  <ThemeProvider theme={darkTheme}>
-    <GlobalStyle />
-    <App />
-  </ThemeProvider>,
-  // </StrictMode>,
-);
+function App() {
+  return (
+    <>
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <ToDoList />
+      </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
